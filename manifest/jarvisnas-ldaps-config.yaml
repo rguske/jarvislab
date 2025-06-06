@@ -1,0 +1,28 @@
+oc create -f - <<EOF
+apiVersion: config.openshift.io/v1
+kind: OAuth
+metadata:
+  name: cluster
+spec:
+  identityProviders:
+  - name: ldap
+    mappingMethod: claim
+    type: LDAP
+    ldap:
+      attributes:
+        id:
+        - dn
+        email:
+        - mail
+        name:
+        - cn
+        preferredUsername:
+        - uid
+      bindDN: "uid=root,cn=users,dc=ldap,dc=jarvis,dc=lab"
+      bindPassword:
+        name: ldap-bind-password-54q2q
+      ca:
+        name: ca-config-map
+      insecure: false
+      url: "ldaps://jarvisnas.jarvis.lab/dc=ldap,dc=jarvis,dc=lab"
+EOF

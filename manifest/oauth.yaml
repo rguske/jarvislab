@@ -1,0 +1,42 @@
+apiVersion: config.openshift.io/v1
+kind: OAuth
+metadata:
+  name: cluster
+spec:
+  identityProviders:
+    - ldap:
+        attributes:
+          email:
+            - mail
+          id:
+            - dn
+          name:
+            - cn
+          preferredUsername:
+            - uid
+        bindDN: 'uid=root,cn=users,dc=ldap,dc=jarvis,dc=lab'
+        bindPassword:
+          name: ldap-bind-password-wlkcr
+        ca:
+          name: ldap-ca-q2hrq
+        insecure: false
+        url: 'ldaps://jarvisnas.jarvis.lab/dc=ldap,dc=jarvis,dc=lab'
+      mappingMethod: claim
+      name: ldap
+      type: LDAP
+    - github:
+        clientID: Ov23ligGyzfBsYoIhpAT
+        clientSecret:
+          name: github-client-secret-7g69q
+        hostname: ''
+        organizations:
+          - rguske-labs
+        teams: []
+      mappingMethod: claim
+      name: github
+      type: GitHub
+  templates:
+    login:
+      name: login-template
+    providerSelection:
+      name: providers-template

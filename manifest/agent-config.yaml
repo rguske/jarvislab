@@ -1,0 +1,44 @@
+apiVersion: v1beta1
+kind: AgentConfig
+metadata:
+  name: ocp-mk1
+rendezvousIP: 192.168.42.2
+hosts:
+  - hostname: ocp-mk1.jarvis.lab
+    role: master
+    interfaces:
+      - name: eno1
+        macAddress: ac:1f:6b:7e:fe:38
+    networkConfig:
+      interfaces:
+      - name: eno1
+        mac-address: ac:1f:6b:7e:fe:38
+        type: ethernet
+        ipv6:
+          enabled: false
+        ipv4:
+          enabled: false
+      - name: eno1.42
+        type: vlan
+        state: up
+        ipv4:
+          enabled: true
+          address:
+            - ip: 192.168.42.2
+              prefix-length: 24
+          dhcp: false
+        ipv6:
+          enabled: false
+        vlan:
+          base-iface: eno1
+          id: 42
+      dns-resolver:
+        config:
+          server:
+            - 10.10.42.20
+      routes:
+        config:
+          - destination: 0.0.0.0/0
+            next-hop-address: 192.168.42.1
+            next-hop-interface: eno1.42
+            table-id: 254

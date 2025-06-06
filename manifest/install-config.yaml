@@ -1,0 +1,25 @@
+apiVersion: v1
+baseDomain: jarvis.lab
+compute:
+- name: worker
+  replicas: 0
+controlPlane:
+  name: master
+  replicas: 1
+metadata:
+  name: ocp-mk1
+platform:
+  none: # apiVIPs and ingressVIPs aren't necessary for Single Node OpenShift (SNO)
+  clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+  machineNetwork:
+    - cidr: 192.168.42.0/24
+  serviceNetwork:
+    - 172.30.0.0/16
+  networkType: OVNKubernetes
+bootstrapInPlace:
+  installationDisk: /dev/vda # CHECK!
+fips: false
+pullSecret: ''
+sshKey: ''
