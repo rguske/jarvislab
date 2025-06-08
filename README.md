@@ -14,5 +14,3 @@
 ## Customization
 
 Login Screen
-
-![login-cover](/assets/cover-black-jarvis-lab-ironman.png)
