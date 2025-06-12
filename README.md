@@ -1,15 +1,17 @@
-# Documentation of my Homelab Jarvis-Lab
+# Documentation Jarvis-Lab (Homelab Robert Guske)
+
+Manifest as well as other lab relevant files are located in the respective [REPOSITORY](https://github.com/rguske/jarvislab) on Github.
 
 ![cover](/assets/cover-jarvis-lab-ironman.png)
 
-- [Documentation of my Homelab Jarvis-Lab](#documentation-of-my-homelab-jarvis-lab)
+- [Documentation Jarvis-Lab (Homelab Robert Guske)](#documentation-jarvis-lab-homelab-robert-guske)
   - [Networking](#networking)
   - [Storage](#storage)
   - [Customization](#customization)
 
 ## Networking
 
-
+![jarvislab](/assets/jarvislab-network.png)
 
 ## Storage
 
