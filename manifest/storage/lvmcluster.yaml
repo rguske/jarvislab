@@ -1,0 +1,29 @@
+apiVersion: lvm.topolvm.io/v1alpha1
+kind: LVMCluster
+metadata:
+  name: lvmcluster1
+spec:
+  storage:
+    deviceClasses:
+    - name: vg1
+      fstype: xfs
+      default: true
+      nodeSelector:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - ocp-mk1-w1.jarvis.lab
+            - ocp-mk1.jarvis.lab
+      deviceSelector:
+        paths:
+        - /dev/disk/by-path/pci-0000:00:1f.2-ata-1
+        optionalPaths:
+        - /dev/disk/by-path/pci-0000:00:1f.2-ata-1.0
+        forceWipeDevicesAndDestroyAllData: true
+      thinPoolConfig:
+        name: thin-pool-1
+        sizePercent: 90
+        overprovisionRatio: 10
+        chunkSize: 128Ki
