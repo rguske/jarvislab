@@ -4,6 +4,17 @@ metadata:
   name: cluster
 spec:
   identityProviders:
+    - github:
+        clientID: Ov23ligGyzfBsYoIhpAT
+        clientSecret:
+          name: github-client-secret-xgllr
+        hostname: ''
+        organizations:
+          - rguske-labs
+        teams: []
+      mappingMethod: claim
+      name: github
+      type: GitHub
     - ldap:
         attributes:
           email:
@@ -16,27 +27,9 @@ spec:
             - uid
         bindDN: 'uid=root,cn=users,dc=ldap,dc=jarvis,dc=lab'
         bindPassword:
-          name: ldap-bind-password-wlkcr
-        ca:
-          name: ldap-ca-q2hrq
-        insecure: false
-        url: 'ldaps://jarvisnas.jarvis.lab/dc=ldap,dc=jarvis,dc=lab'
+          name: ldap-bind-password-p6nj9
+        insecure: true
+        url: 'ldap://jarvisnas.jarvis.lab/cn=users,dc=ldap,dc=jarvis,dc=lab?uid'
       mappingMethod: claim
       name: ldap
       type: LDAP
-    - github:
-        clientID: Ov23ligGyzfBsYoIhpAT
-        clientSecret:
-          name: github-client-secret-7g69q
-        hostname: ''
-        organizations:
-          - rguske-labs
-        teams: []
-      mappingMethod: claim
-      name: github
-      type: GitHub
-  templates:
-    login:
-      name: login-template
-    providerSelection:
-      name: providers-template
