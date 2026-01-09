@@ -1,5 +1,26 @@
 # Jarvislab Retroplay Online Applications
 
+```code
+tree
+.
+├── assets
+│   ├── retroplay.jpg
+│   └── retroplay.png
+├── pacman
+│   ├── pacman-deployment.yaml
+│   ├── pacman-sa-role-rb.yaml
+│   └── README.md
+├── postgres
+│   ├── base
+│   │   ├── kustomization.yaml
+│   │   ├── persistentvolumeclaims.yaml
+│   │   ├── services.yaml
+│   │   └── statefulset.yaml
+│   ├── overlays
+│   └── README.md
+└── README.md
+```
+
 Deployed via GitOps.
 
 Per default, OpenShift GitOps RBAC is configured like:
