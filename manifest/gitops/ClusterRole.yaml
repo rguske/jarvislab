@@ -287,3 +287,31 @@ rules:
   verbs:
   - create
   - patch
+- apiGroups:
+  - sources.knative.dev
+  resources:
+  - apiserversources
+  verbs:
+  - create
+  - patch
+- apiGroups:
+  - eventing.knative.dev
+  resources:
+  - brokers
+  verbs:
+  - create
+  - patch
+- apiGroups:
+  - eventing.knative.dev
+  resources:
+  - triggers
+  verbs:
+  - create
+  - patch
+- apiGroups:
+  - eventing.knative.dev
+  resources:
+  - eventtransforms
+  verbs:
+  - create
+  - patch
