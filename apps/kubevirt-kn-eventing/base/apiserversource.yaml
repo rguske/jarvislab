@@ -1,0 +1,17 @@
+apiVersion: sources.knative.dev/v1
+kind: ApiServerSource
+metadata:
+  name: apiserversource
+  labels:
+    app: apiserversource
+spec:
+  mode: Resource
+  resources:
+    - apiVersion: kubevirt.io/v1
+      kind: VirtualMachine
+  serviceAccountName: events-sa
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: broker-apiserversource

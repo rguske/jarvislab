@@ -1,0 +1,29 @@
+apiVersion: eventing.knative.dev/v1alpha1
+kind: EventTransform
+metadata:
+  name: vmdata-transform
+spec:
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: broker-eventtransform
+  jsonata:
+    expression: |
+      {
+        "specversion": specversion,
+        "type": type,
+        "source": source,
+        "subject": subject,
+        "id": id,
+        "time": time,
+        "kind": kind,
+        "name": name,
+        "namespace": namespace,
+        "cpucores": data.spec.template.spec.domain.cpu.cores,
+        "cpusockets": data.spec.template.spec.domain.cpu.sockets,
+        "memory": data.spec.template.spec.domain.memory.guest,
+        "datasource": data.spec.dataVolumeTemplates.spec.storage.resources.resources.storage,
+        "storageclass": data.spec.dataVolumeTemplates.spec.storage.storageClassName,
+        "network": data.spec.template.spec.networks.name
+      }
