@@ -1,0 +1,55 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+    name: postgres-os
+    labels:
+      app: postgres
+spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+         requests:
+            storage: 20Gi
+    storageClassName: synology-iscsi-storage
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-data-pvc
+  labels:
+    app: postgres
+spec:
+  storageClassName: synology-iscsi-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 30Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-log-pvc
+  labels:
+    app: postgres
+spec:
+  storageClassName: synology-iscsi-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 30Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-backup-pvc
+  labels:
+    app: postgres
+spec:
+  storageClassName: synology-iscsi-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 30Gi

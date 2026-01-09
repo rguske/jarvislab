@@ -1,0 +1,31 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: postgres-svc
+  labels:
+    app: postgres
+spec:
+  ports:
+    - name: postgresql
+      protocol: TCP
+      port: 5432
+      targetPort: 5432
+  type: ClusterIP
+  selector:
+    name: postgres
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-lb
+  labels:
+    zone: lab
+spec:
+  selector:
+    app: postgres
+  ports:
+    - port: 5432
+      targetPort: 5432
+      protocol: TCP
+  type: LoadBalancer

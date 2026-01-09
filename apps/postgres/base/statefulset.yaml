@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgresql
+  labels:
+    app: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: postgres
+          image: postgres:16.1
+          args:
+            - "-c"
+            - "log_directory=/mnt/postgresql-16/pglogs/logs"
+            - "-c"
+            - "data_directory=/mnt/postgresql-16/pgdata/data"
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-secret
+                  key: POSTGRES_PASSWORD
+            - name: PGDATA
+              value: /mnt/postgresql-16/pgdata/data
+            - name: PG_LOG
+              value: /mnt/postgresql-16/pglogs/logs
+          volumeMounts:
+            - name: pgdata
+              mountPath: /mnt/postgresql-16/pgdata
+            - name: pgsqlos
+              mountPath: /var/opt/pgsql
+            - name: pgbackup
+              mountPath: /mnt/postgresql-16/pgbackup
+            - name: pglogs
+              mountPath: /mnt/postgresql-16/pglogs
+          securityContext:
+            fsGroup: 999
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+      volumes:
+        - name: pgdata
+          persistentVolumeClaim:
+            claimName: postgres-data-pvc
+        - name: pgsqlos
+          persistentVolumeClaim:
+            claimName: postgres-os
+        - name: pglogs
+          persistentVolumeClaim:
+            claimName: postgres-log-pvc
+        - name: pgbackup
+          persistentVolumeClaim:
+            claimName: postgres-backup-pvc
