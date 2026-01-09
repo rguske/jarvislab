@@ -276,7 +276,7 @@ rules:
 - apiGroups:
   - apps
   resources:
-  - StatefulSet
+  - statefulsets
   verbs:
   - create
   - patch
