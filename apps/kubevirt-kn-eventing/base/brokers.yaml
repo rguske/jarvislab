@@ -16,7 +16,7 @@ spec:
 apiVersion: eventing.knative.dev/v1
 kind: Broker
 metadata:
-  name: broker-event-transformer
+  name: broker-eventtransform
 spec:
   config:
     apiVersion: v1
