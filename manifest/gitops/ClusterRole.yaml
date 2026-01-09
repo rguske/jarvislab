@@ -285,6 +285,7 @@ rules:
   resources:
   - services
   verbs:
+  - delete
   - create
   - patch
 - apiGroups:
@@ -292,6 +293,7 @@ rules:
   resources:
   - apiserversources
   verbs:
+  - delete
   - create
   - patch
 - apiGroups:
@@ -299,6 +301,7 @@ rules:
   resources:
   - brokers
   verbs:
+  - delete
   - create
   - patch
 - apiGroups:
@@ -306,6 +309,7 @@ rules:
   resources:
   - triggers
   verbs:
+  - delete
   - create
   - patch
 - apiGroups:
@@ -313,5 +317,6 @@ rules:
   resources:
   - eventtransforms
   verbs:
+  - delete
   - create
   - patch
