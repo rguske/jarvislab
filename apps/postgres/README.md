@@ -22,6 +22,6 @@ metadata:
     app: postgres
 type: Opaque
 data:
-  POSTGRES_PASSWORD: 'cmVkaGF0Cg=='
+  POSTGRES_PASSWORD: ''
 EOF
 ```
