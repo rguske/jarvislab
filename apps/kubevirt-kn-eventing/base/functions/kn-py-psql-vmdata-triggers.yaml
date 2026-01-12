@@ -1,0 +1,43 @@
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  labels:
+    eventing.knative.dev/broker: broker-eventtransform
+  name: trigger-vm-add
+spec:
+  broker: broker-eventtransform
+  filter:
+    attributes:
+      type: dev.knative.apiserver.resource.add
+  subscriber:
+    ref:
+      apiVersion:  serving.knative.dev/v1
+      kind: Service
+      name: kn-py-psql-vmdata-fn
+  delivery:
+    retry: 1
+    backoffPolicy: linear
+    backoffDelay: PT5S
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  labels:
+    eventing.knative.dev/broker: broker-eventtransform
+  name: trigger-vm-delete
+spec:
+  broker: broker-eventtransform
+  filter:
+    attributes:
+      type: dev.knative.apiserver.resource.delete
+  subscriber:
+    ref:
+      apiVersion:  serving.knative.dev/v1
+      kind: Service
+      name: kn-py-psql-vmdata-fn
+  delivery:
+    retry: 1
+    backoffPolicy: linear
+    backoffDelay: PT5S
+---
