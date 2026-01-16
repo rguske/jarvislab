@@ -1,0 +1,15 @@
+apiVersion: operator.openshift.io/v1
+kind: KubeDescheduler
+metadata:
+  name: cluster
+  namespace: openshift-kube-descheduler-operator
+spec:
+  managementState: Managed
+  deschedulingIntervalSeconds: 300
+  mode: Automatic
+  profiles:
+    - KubeVirtRelieveAndMigrate
+  profileCustomizations:
+    devEnableSoftTainter: true
+    devDeviationThresholds: AsymmetricMedium
+    devActualUtilizationProfile: PrometheusCPUCombined

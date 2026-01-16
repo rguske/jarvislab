@@ -1,0 +1,1 @@
+# Quake 3 classic on OpenShift
