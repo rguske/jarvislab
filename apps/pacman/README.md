@@ -1,2 +1,2 @@
-# Pacman on Kubernetes
+# Pacman on OpenShift Demo
 

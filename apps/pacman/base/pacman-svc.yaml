@@ -1,0 +1,18 @@
+---
+# PacMan Service
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: NAMESPACE
+  name: pacman-svc
+  labels:
+    name: pacman-svc
+spec:
+  type: ClusterIP
+  ports:
+    - port: 443
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    name: pacman
+---

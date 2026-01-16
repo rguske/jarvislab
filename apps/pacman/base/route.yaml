@@ -1,0 +1,20 @@
+# PodMan OpenShift Route
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  namespace: NAMESPACE
+  name: pacman-route
+  labels:
+    name: pacman-route
+spec:
+  to:
+    kind: Service
+    name: pacman-svc
+    weight: 100
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  selector:
+    name: pacman
