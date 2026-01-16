@@ -2,7 +2,7 @@
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
-  namespace: NAMESPACE
+  namespace: pacman
   name: pacman-route
   labels:
     name: pacman-route

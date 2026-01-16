@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: NAMESPACE
+  namespace: pacman
   name: pacman-svc
   labels:
     name: pacman-svc
