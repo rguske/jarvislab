@@ -24,7 +24,7 @@ spec:
         command:
         - /bin/bash
         - -ec
-        image: bitnamitest/bitnami-shell:11-debian-11-r118
+        image: quay.io/rguske/bitnami-shell:11-debian-11-r118
         imagePullPolicy: Always
         name: volume-permissions
         resources: {}
@@ -46,7 +46,7 @@ spec:
         persistentVolumeClaim:
           claimName: mongo-storage
       containers:
-      - image: bitnami/mongodb:sha256-e35302681b7e87bfab8f25fb2b5b83c4b14f8a205a75c8087e68e0fd49df347e
+      - image: bitnami/mongodb:latest
         name: mongo
         env:
         - name: MONGODB_ROOT_PASSWORD
