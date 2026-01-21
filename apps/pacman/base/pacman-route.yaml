@@ -1,19 +1,15 @@
-# PodMan OpenShift Route
-kind: Route
 apiVersion: route.openshift.io/v1
+kind: Route
 metadata:
-  name: pacman-route
+  name: pacman
   labels:
     app.kubernetes.io/name: pacman
 spec:
+  path: "/"
   to:
     kind: Service
     name: pacman
-    weight: 100
-  port:
-    targetPort: 8080
   tls:
     termination: edge
     insecureEdgeTerminationPolicy: Redirect
-  selector:
-    name: pacman
+  wildcardPolicy: None

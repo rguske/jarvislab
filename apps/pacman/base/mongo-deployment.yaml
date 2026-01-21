@@ -2,45 +2,28 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    name: mongo
-  name: mongo
+    name: mongodb
+    app: mongodb
+  name: mongodb
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: mongo
+      name: mongodb
   template:
     metadata:
       labels:
-        name: mongo
-      annotations:
+        name: mongodb
+        app: mongodb
     spec:
+      securityContext:
+        fsGroup: 1001
+        runAsUser: 1001
       containers:
-      - image: mongodb/mongodb-community-server:7.0-ubi8
-        name: mongo
-        env:
-        - name: MONGODB_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              key: database-admin-password
-              name: mongodb-users-secret
-        - name: MONGODB_DATABASE
-          valueFrom:
-            secretKeyRef:
-              key: database-name
-              name: mongodb-users-secret
-        - name: MONGODB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              key: database-password
-              name: mongodb-users-secret
-        - name: MONGODB_USERNAME
-          valueFrom:
-            secretKeyRef:
-              key: database-user
-              name: mongodb-users-secret
+      - image: bitnamilegacy/mongodb:5.0.24-debian-11-r20
+        name: mongodb
         ports:
-        - name: mongo
+        - name: mongodb
           containerPort: 27017
         volumeMounts:
           - name: mongo-db
