@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: quake
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     run: quake
   ports:

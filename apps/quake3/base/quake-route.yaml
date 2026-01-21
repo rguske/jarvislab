@@ -1,0 +1,16 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: quake-route
+  labels:
+    app.kubernetes.io/name: quake
+    run: quake
+spec:
+  path: "/"
+  to:
+    kind: Service
+    name: quake
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
