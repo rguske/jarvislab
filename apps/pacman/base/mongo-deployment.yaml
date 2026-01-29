@@ -15,6 +15,7 @@ spec:
       labels:
         name: mongodb
         app: mongodb
+    serviceAccountName: pacman-sa
     spec:
       securityContext:
         fsGroup: 1001

@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         name: pacman
+    serviceAccountName: pacman-sa
     spec:
       containers:
       - image: quay.io/jpacker/nodejs-pacman-app:latest
