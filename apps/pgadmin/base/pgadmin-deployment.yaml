@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pgadmin
+  name: pgadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pgadmin
+  template:
+    metadata:
+      labels:
+        app: pgadmin
+    serviceAccountName: pgadmin-sa
+    spec:
+      hostname: pgadmin
+      subdomain: pgadmin
+      containers:
+      - image:  docker.io/crunchydata/crunchy-pgadmin4:centos8-13.6-4.7.5
+        name: pgadmin4
+        env:
+          # pgAdmin listen config
+          - name: PGADMIN_LISTEN_ADDRESS
+            value: "0.0.0.0"
+          - name: SERVER_PORT
+            value: "5050"
+          # Sensitive values from Secret
+          - name: PGADMIN_SETUP_EMAIL
+            valueFrom:
+              secretKeyRef:
+                name: pgadmin-credentials
+                key: PGADMIN_SETUP_EMAIL
+          - name: PGADMIN_SETUP_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: pgadmin-credentials
+                key: PGADMIN_SETUP_PASSWORD
+          - name: PGADMIN_DEFAULT_EMAIL
+            valueFrom:
+              secretKeyRef:
+                name: pgadmin-credentials
+                key: PGADMIN_DEFAULT_EMAIL
+          - name: PGADMIN_DEFAULT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: pgadmin-credentials
+                key: PGADMIN_DEFAULT_PASSWORD
+

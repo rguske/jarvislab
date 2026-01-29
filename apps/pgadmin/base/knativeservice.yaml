@@ -8,21 +8,27 @@ spec:
       annotations:
         autoscaling.knative.dev/minScale: "1"
         autoscaling.knative.dev/maxScale: "2"
-    serviceAccountName: pgadmin-sa
     spec:
+      serviceAccountName: pgadmin-sa
       containers:
-        - name: pgadmin
-          image: dpage/pgadmin4:9.11.0
+        - name: pgadmin4
+          image: docker.io/crunchydata/crunchy-pgadmin4:centos8-13.6-4.7.5
           env:
-#            # Knative expects the container to listen on $PORT (default 8080)
-#            - name: PORT
-#              value: "8080"
-            # pgAdmin listen config
-            - name: PGADMIN_LISTEN_ADDRESS
-              value: "0.0.0.0"
-            - name: PGADMIN_LISTEN_PORT
-              value: "8080"
-            # Sensitive values from Secret
+            - name: SERVER_PORT
+              value: "5050"
+            # optional, if the image supports/needs it:
+            - name: PGADMIN_DOMAIN
+              value: "retroplay-online.apps.ocp-mk42.retroplay.guske.io"
+            - name: PGADMIN_SETUP_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: pgadmin-credentials
+                  key: PGADMIN_SETUP_EMAIL
+            - name: PGADMIN_SETUP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pgadmin-credentials
+                  key: PGADMIN_SETUP_PASSWORD
             - name: PGADMIN_DEFAULT_EMAIL
               valueFrom:
                 secretKeyRef:
@@ -35,4 +41,4 @@ spec:
                   key: PGADMIN_DEFAULT_PASSWORD
           ports:
             - name: http1
-              containerPort: 8080
+              containerPort: 5050
