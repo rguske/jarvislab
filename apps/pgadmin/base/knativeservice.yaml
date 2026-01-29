@@ -28,4 +28,4 @@ spec:
                   key: PGADMIN_DEFAULT_PASSWORD
           ports:
             - name: http1
-              containerPort: 80
+              containerPort: 8080
