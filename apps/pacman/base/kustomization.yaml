@@ -1,4 +1,6 @@
 resources:
+- cluserrolebinding.yaml
+- sa.yaml
 - mongo-pvc.yaml
 - mongo-deployment.yaml
 - mongo-service.yaml
