@@ -8,6 +8,7 @@ spec:
       annotations:
         autoscaling.knative.dev/minScale: "1"
         autoscaling.knative.dev/maxScale: "2"
+    serviceAccountName: pgadmin-sa
     spec:
       containers:
         - name: pgadmin
