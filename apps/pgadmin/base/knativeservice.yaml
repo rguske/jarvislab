@@ -9,7 +9,6 @@ spec:
         autoscaling.knative.dev/minScale: "1"
         autoscaling.knative.dev/maxScale: "2"
     spec:
-      serviceAccountName: pgadmin-sa
       containers:
         - name: pgadmin4
           image: docker.io/crunchydata/crunchy-pgadmin4:centos8-13.6-4.7.5
