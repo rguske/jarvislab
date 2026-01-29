@@ -17,9 +17,9 @@ spec:
         app: mongodb
     serviceAccountName: pacman-sa
     spec:
-      securityContext:
-        fsGroup: 1001
-        runAsUser: 1001
+#      securityContext:
+#        fsGroup: 1001
+#        runAsUser: 1001
       containers:
       - image: bitnamilegacy/mongodb:5.0.24-debian-11-r20
         name: mongodb
