@@ -175,12 +175,12 @@ vi config/client-info.yml
 ```yaml
 ---
 clients:
-  - host: 10.10.42.20
+  - host: synology...
     port: 5000
     https: false
     username: synology-csi-sa
     password: 'R3dh4t1!'
-  - host: 10.10.42.20
+  - host: synology...
     port: 5001
     https: true
     username: synology-csi-sa
