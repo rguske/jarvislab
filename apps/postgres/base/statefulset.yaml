@@ -17,7 +17,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: postgres
-          image: postgres:16.1
+          image: docker.io/postgres:16.1
           args:
             - "-c"
             - "log_directory=/mnt/postgresql-16/pglogs/logs"

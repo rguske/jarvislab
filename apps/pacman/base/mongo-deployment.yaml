@@ -23,6 +23,13 @@ spec:
       containers:
       - image: docker.io/bitnamilegacy/mongodb:5.0.24-debian-11-r20
         name: mongodb
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1"
         ports:
         - name: mongodb
           containerPort: 27017

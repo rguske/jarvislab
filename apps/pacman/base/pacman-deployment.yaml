@@ -21,6 +21,13 @@ spec:
         ports:
         - containerPort: 8080
           name: http-server
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
       initContainers:
       - name: db-check
         image: busybox:latest

@@ -20,6 +20,13 @@ spec:
       containers:
       - image: quay.io/sticen/pgadmin4:latest
         name: pgadmin4
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
         env:
           # pgAdmin listen config
           - name: PGADMIN_LISTEN_ADDRESS
