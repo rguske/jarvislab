@@ -1,0 +1,23 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: postgresql-read-webapp
+  namespace: postgres
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/max-scale: '2'
+        autoscaling.knative.dev/min-scale: '1'
+    spec:
+      containerConcurrency: 0
+      containers:
+        - env:
+            - name: DB_NAME
+              value: vmdb
+            - name: DB_PORT
+              value: '5432'
+          envFrom:
+            - secretRef:
+                name: pg-credentials
+          image: 'quay.io/rguske/psql-read-webapp:v1.1'
