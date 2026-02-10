@@ -8,7 +8,6 @@ Manifest as well as other lab relevant files are located in the respective [REPO
   - [Networking](#networking)
   - [Storage](#storage)
     - [NFS CSI Driver](#nfs-csi-driver)
-    - [Local Storage](#local-storage)
     - [Synology CSI](#synology-csi)
   - [Authentication](#authentication)
   - [Customization](#customization)
@@ -73,7 +72,7 @@ metadata:
     storageclass.kubernetes.io/is-default-class: "true"
 provisioner: nfs.csi.k8s.io
 parameters:
-  server: 10.10.42.20   ### NFS server's IP/FQDN
+  server:    ### NFS server's IP/FQDN
   share: /volume1/nfs_ds/ocp             ### NFS server's exported directory
   subDir: ${pvc.metadata.namespace}-${pvc.metadata.name}-${pv.metadata.name}  ### Folder/subdir name template
 reclaimPolicy: Delete
@@ -98,50 +97,6 @@ metadata:
 Set the StorageClass to `default`:
 
 `oc annotate storageclass/nfs-csi storageclass.kubernetes.io/is-default-class=true`
-
-### Local Storage
-
-Option 1:
-
-[Installing the Local Storage Operator](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/storage/configuring-persistent-storage#local-storage-install_persistent-storage-local)
-
-Option 2:
-
-[Logical Volume Manager Storage installation](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/storage/configuring-persistent-storage)
-
-Installation via yaml:
-
-`oc apply -f https://raw.githubusercontent.com/rguske/jarvislab/refs/heads/main/manifest/storage/lvm-storage-operator.yaml`
-
-Via Operator [Web Console](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/storage/configuring-persistent-storage#lvms-installing-lvms-with-web-console_logical-volume-manager-storage)
-
-Install the Logical Volume Cluster only including the SSD with the `by-path` identifier:
-
-`ls -li /dev/disk/by-path`
-
-`oc apply -f https://raw.githubusercontent.com/rguske/jarvislab/refs/heads/main/manifest/storage/lvmcluster.yaml`
-
-Create a test `pvc`:
-
-```yaml
-oc create -f - <<EOF
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: lvm-block-1
-  namespace: default
-spec:
-  accessModes:
-    - ReadWriteOnce
-  volumeMode: Block
-  resources:
-    requests:
-      storage: 10Gi
-    limits:
-      storage: 20Gi
-  storageClassName: lvms-vg1
-EOF
-```
 
 ### Synology CSI
 
@@ -179,7 +134,7 @@ clients:
     port: 5000
     https: false
     username: synology-csi-sa
-    password: 'R3dh4t1!'
+    password: ''
   - host: synology...
     port: 5001
     https: true
@@ -235,7 +190,7 @@ volumes:
 EOF
 ```
 
-* Deploy the Synology Provisioning Pods
+- Deploy the Synology Provisioning Pods
 
 ```code
 oc create -f deploy/kubernetes/v1.20/
@@ -243,7 +198,7 @@ oc create -f deploy/kubernetes/v1.20/
 oc create -f deploy/kubernetes/v1.20/snapshotter/
 ```
 
-* Storageclasses
+- Storageclasses
 
 For NFS:
 
@@ -276,7 +231,7 @@ metadata:
   name: synology-iscsi-storage
 provisioner: csi.san.synology.com
 parameters:
-  dsm: '172.16.20.13'
+  dsm: ''
   location: '/volume1'
   csi.storage.k8s.io/fstype: 'ext4'
 reclaimPolicy: Delete
@@ -284,14 +239,14 @@ allowVolumeExpansion: true
 EOF
 ```
 
-* Default StorageClass
+- Default StorageClass
 
 ```code
 oc annotate storageclass synology-iscsi-storage storageclass.kubernetes.io/is-default-class=true
 storageclass.storage.k8s.io/synology-iscsi-storage annotated
 ```
 
-* Configuring the default StorageProfile for KubeVirt
+- Configuring the default StorageProfile for KubeVirt
 
 iSCSI:
 

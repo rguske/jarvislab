@@ -1,0 +1,18 @@
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: br-vmdata
+spec:
+  desiredState:
+    interfaces:
+      - bridge:
+          allow-extra-patch-ports: true
+          options:
+            stp: false
+          port:
+            - name: eno2
+        name: br-vmdata
+        state: up
+        type: ovs-bridge
+  nodeSelector:
+    node-role.kubernetes.io/worker: ''

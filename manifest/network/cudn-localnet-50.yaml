@@ -1,0 +1,19 @@
+apiVersion: k8s.ovn.org/v1
+kind: ClusterUserDefinedNetwork
+metadata:
+  name: localnet-50
+spec:
+  namespaceSelector:
+    matchLabels:
+      kubernetes.io/metadata.name: default
+  network:
+    localnet:
+      ipam:
+        mode: Disabled
+      physicalNetworkName: physnet-vmdata
+      role: Secondary
+      vlan:
+        access:
+          id: 50
+        mode: Access
+    topology: Localnet
