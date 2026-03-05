@@ -54,6 +54,7 @@ rules:
   verbs:
   - patch
   - create
+  - delete
 - apiGroups:
   - ''
   resources:
@@ -134,6 +135,7 @@ rules:
   verbs:
   - patch
   - create
+  - delete
 - apiGroups:
   - 'lvm.topolvm.io'
   resources:
@@ -267,6 +269,7 @@ rules:
   verbs:
   - patch
   - create
+  - delete
 - apiGroups:
   - addon.open-cluster-management.io
   resources:
