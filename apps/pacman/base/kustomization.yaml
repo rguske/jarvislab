@@ -1,6 +1,6 @@
 resources:
-- clusterrolebinding.yaml
-- sa.yaml
+# - clusterrolebinding.yaml
+# - sa.yaml
 - mongo-pvc.yaml
 - mongo-deployment.yaml
 - mongo-service.yaml
