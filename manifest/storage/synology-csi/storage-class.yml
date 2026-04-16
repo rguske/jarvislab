@@ -10,5 +10,6 @@ parameters:
    location: '/volume1'
    fsType: 'ext4'
    protocol: 'iscsi'
+   type: thin
 reclaimPolicy: Delete
 allowVolumeExpansion: true

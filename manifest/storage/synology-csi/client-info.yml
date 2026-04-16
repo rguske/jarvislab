@@ -2,7 +2,7 @@
 clients:
   - host: 172.20.42.20
     port: 5000
-    https: false
+    https: true
     username: synology-csi-sa
     password: 'R3dh4t1!'
   - host: 172.20.42.20

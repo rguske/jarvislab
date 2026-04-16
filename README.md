@@ -193,9 +193,9 @@ EOF
 - Deploy the Synology Provisioning Pods
 
 ```code
-oc create -f deploy/kubernetes/v1.20/
+oc apply -f deploy/kubernetes/v1.20/
 
-oc create -f deploy/kubernetes/v1.20/snapshotter/
+oc apply -f deploy/kubernetes/v1.20/snapshotter/
 ```
 
 - Storageclasses
@@ -228,14 +228,20 @@ oc create -f - <<EOF
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: synology-iscsi-storage
+  name: synology-iscsi
+  annotations:
+    storageclass.kubernetes.io/is-default-class: 'true'
+    storageclass.kubevirt.io/is-default-virt-class: 'true'
 provisioner: csi.san.synology.com
 parameters:
   dsm: ''
   location: '/volume1'
   csi.storage.k8s.io/fstype: 'ext4'
+  formatOptions: '--nodiscard'
+  type: thin
 reclaimPolicy: Delete
 allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer
 EOF
 ```
 
