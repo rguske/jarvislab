@@ -1,15 +1,15 @@
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: synology-iscsi-btrfs-thin
+  name: synology-iscsi-ext4-thin
   annotations:
     storageclass.kubernetes.io/is-default-class: 'true'
     storageclass.kubevirt.io/is-default-virt-class: 'true'
 provisioner: csi.san.synology.com
 parameters:
-  csi.storage.k8s.io/fstype: btrfs
+  csi.storage.k8s.io/fstype: ext4
+  formatOptions: '-E nodiscard'
   dsm: 172.20.42.20
-  formatOptions: '--nodiscard'
   location: /volume1
   type: thin
 reclaimPolicy: Delete
