@@ -10,7 +10,7 @@ spec:
     resources:
          requests:
             storage: 20Gi
-    storageClassName: synology-iscsi-storage
+    storageClassName: synology-iscsi-ext4-thin
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -19,7 +19,7 @@ metadata:
   labels:
     app: postgres
 spec:
-  storageClassName: synology-iscsi-storage
+  storageClassName: synology-iscsi-ext4-thin
   accessModes:
     - ReadWriteOnce
   resources:
@@ -33,7 +33,7 @@ metadata:
   labels:
     app: postgres
 spec:
-  storageClassName: synology-iscsi-storage
+  storageClassName: synology-iscsi-ext4-thin
   accessModes:
     - ReadWriteOnce
   resources:
@@ -47,7 +47,7 @@ metadata:
   labels:
     app: postgres
 spec:
-  storageClassName: synology-iscsi-storage
+  storageClassName: synology-iscsi-ext4-thin
   accessModes:
     - ReadWriteOnce
   resources:
