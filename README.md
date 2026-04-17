@@ -225,19 +225,19 @@ For iSCSI:
 
 ```yaml
 oc create -f - <<EOF
-apiVersion: storage.k8s.io/v1
 kind: StorageClass
+apiVersion: storage.k8s.io/v1
 metadata:
-  name: synology-iscsi
+  name: synology-iscsi-btrfs-thin
   annotations:
     storageclass.kubernetes.io/is-default-class: 'true'
     storageclass.kubevirt.io/is-default-virt-class: 'true'
 provisioner: csi.san.synology.com
 parameters:
-  dsm: ''
-  location: '/volume1'
-  csi.storage.k8s.io/fstype: 'ext4'
+  csi.storage.k8s.io/fstype: btrfs
+  dsm: 172.20.42.20
   formatOptions: '--nodiscard'
+  location: /volume1
   type: thin
 reclaimPolicy: Delete
 allowVolumeExpansion: true

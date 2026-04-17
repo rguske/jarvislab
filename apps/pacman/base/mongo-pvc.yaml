@@ -3,7 +3,7 @@ apiVersion: v1
 metadata:
   name: mongo-storage
 spec:
-  storageClassName: synology-iscsi
+  storageClassName: synology-iscsi-btrfs-thin
   accessModes:
     - ReadWriteOnce
   resources:
